@@ -1,0 +1,6 @@
+.idea/*
+out/*
+names/*
+*.iml
+.DS_Store
+secrets.rb
