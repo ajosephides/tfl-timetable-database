@@ -4,3 +4,4 @@ names/*
 *.iml
 .DS_Store
 secrets.rb
+london_tube.db
