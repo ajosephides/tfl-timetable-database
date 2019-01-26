@@ -1,4 +1,4 @@
-class DbCalls
+class Database
   require 'sqlite3'
 
 

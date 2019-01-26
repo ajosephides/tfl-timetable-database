@@ -2,7 +2,7 @@ class TflApi
 
   require 'net/http'
   require 'json'
-  require './secrets.rb'
+  require 'api/secrets'
 
   include Secrets
 

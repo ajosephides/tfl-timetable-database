@@ -1,7 +1,7 @@
 class TflJsonParse
   require 'json'
-  require './lib/tube/line.rb'
-  require './lib/tube/station.rb'
+  require 'tube/line'
+  require 'tube/station'
 
 
   def createTubeLine(jsonResponse)
