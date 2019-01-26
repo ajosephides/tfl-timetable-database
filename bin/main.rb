@@ -1,4 +1,4 @@
-class TflRun
+
 
   require 'database/database'
   require 'tflParse'
@@ -20,6 +20,3 @@ class TflRun
   tubeStops = parseReturn.map{|i| tubeStopParse.createTubeStop(tubeStopApi.tubeStops(i))}
   tubeStops.each{|i| i.each{|j| tubeDb.addTubeStop(j)}}
   tubeStops.each{|i| i.each{|j| tubeDb.addTubeStopTubeLine(j)}}
-
-
-end
