@@ -1,22 +1,19 @@
+require 'database/database'
+require 'tflParse'
+require 'api/tfl_api'
+
+tubeDb = Database.new('./lib/database/london_tube.db')
 
 
-  require 'database/database'
-  require 'tflParse'
-  require 'api/tfl_api'
+tubeLineApi = TflApi.new
+tubeLineParse = TflJsonParse.new
+parseReturn = tubeLineParse.createTubeLine(tubeLineApi.tubeLines)
 
-  tubeDb = Database.new
-  tubeDb.createDb
-  tubeDb.createTubeLineTable
-  tubeDb.createTubeStopTable
-  tubeDb.createTubeStopTubeLineTable
+parseReturn.each{|i| i.store(tubeDb)}
 
-  tubeLineApi = TflApi.new
-  tubeLineParse = TflJsonParse.new
-  parseReturn = tubeLineParse.createTubeLine(tubeLineApi.tubeLines)
-  parseReturn.each{|i| tubeDb.addTubeLine(i)}
+tubeStopApi = TflApi.new
+tubeStopParse = TflJsonParse.new
+tubeStops = parseReturn.map{|i| tubeStopParse.createTubeStop(tubeStopApi.tubeStops(i))}
 
-  tubeStopApi = TflApi.new
-  tubeStopParse = TflJsonParse.new
-  tubeStops = parseReturn.map{|i| tubeStopParse.createTubeStop(tubeStopApi.tubeStops(i))}
-  tubeStops.each{|i| i.each{|j| tubeDb.addTubeStop(j)}}
-  tubeStops.each{|i| i.each{|j| tubeDb.addTubeStopTubeLine(j)}}
+tubeStops.each{|i| i.each{|j| j.store(tubeDb)}}
+tubeStops.each{|i| i.each{|j| j.store_lines(tubeDb)}}
