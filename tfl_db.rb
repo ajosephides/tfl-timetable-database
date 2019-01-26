@@ -64,9 +64,9 @@ end
   def addTubeLine(tubeLine)
     begin
       db = SQLite3::Database.open "london_tube.db"
-      db.execute "INSERT OR IGNORE INTO TubeLines VALUES(?,?)",[tubeLine.tubeLineId,tubeLine.tubeLineName]
+      db.execute "INSERT OR IGNORE INTO TubeLines VALUES(?,?)",[tubeLine.id,tubeLine.name]
     rescue SQLite3::Exception => e
-      puts "Exception occurred while adding the tube line - #{tubeLine.tubeLineId}"
+      puts "Exception occurred while adding the tube line - #{tubeLine.id}"
       puts e
     ensure
       db.close if db
@@ -77,9 +77,9 @@ end
   def addTubeStop(tubeStop)
     begin
       db = SQLite3::Database.open "london_tube.db"
-      db.execute "INSERT OR IGNORE INTO TubeStop VALUES(?,?,?,?)",[tubeStop.stopPointId,tubeStop.stopPointName,tubeStop.stopPointLat,tubeStop.stopPointLong]
+      db.execute "INSERT OR IGNORE INTO TubeStop VALUES(?,?,?,?)",[tubeStop.id,tubeStop.name,tubeStop.lat,tubeStop.long]
     rescue SQLite3::Exception => e
-      puts "Exception occurred while adding the tube stop - #{tubeStop.stopPointId}"
+      puts "Exception occurred while adding the tube stop - #{tubeStop.id}"
       puts e
     ensure
       db.close if db
@@ -90,10 +90,10 @@ end
   def addTubeStopTubeLine(tubeStop)
     begin
       db = SQLite3::Database.open "london_tube.db"
-    tubeStop.stopPointLines.each{|i| i.each{|j| db.execute "INSERT OR IGNORE INTO TubeStopTubeLine VALUES(?,?)",
-      [tubeStop.stopPointId, j]}}
+    tubeStop.lines.each{|i| i.each{|j| db.execute "INSERT OR IGNORE INTO TubeStopTubeLine VALUES(?,?)",
+      [tubeStop.id, j]}}
   rescue SQLite3::Exception => e
-      puts "Exception occurred while adding the tube stop - #{tubeStop.stopPointName}"
+      puts "Exception occurred while adding the tube stop - #{tubeStop.name}"
       puts e
     ensure
       db.close if db

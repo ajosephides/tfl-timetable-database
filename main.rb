@@ -5,7 +5,7 @@ class Main
   require './secrets.rb'
   require './tfl_db.rb'
   require './tflParse.rb'
-  require './tflApi.rb'
+  require './tfl_api.rb'
 
   tubeDb = DbCalls.new
   tubeDb.createDb
