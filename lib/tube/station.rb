@@ -8,7 +8,7 @@ class Station
   def initialize(id, name, lines, lat, long)
     @id = String(id)
     @name = String(name)
-    @lines = [lines]
+    @lines = lines
     @lat = Float(lat)
     @long = Float(long)
   end
@@ -23,7 +23,7 @@ end
   end
 
   def store_lines(db)
-    lines.each{|i| i.each{|j| db.db[:station_lines].insert_conflict.insert(station_id:@id, line_id:j.to_s)}}
+    lines.each{|i| db.db[:station_lines].insert_conflict.insert(station_id:@id, line_id:String(i))}
   end
 
 end
