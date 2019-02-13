@@ -1,8 +1,8 @@
-class TflJsonParse
-  require 'json'
-  require 'tube/line'
-  require 'tube/station'
+require 'json'
+require 'tube/line'
+require 'tube/station'
 
+class TflJsonParse
 
   def createTubeLine(jsonResponse)
     tubeLineArray = jsonResponse.map{|i| Line.new(i['id'], i['name'])}

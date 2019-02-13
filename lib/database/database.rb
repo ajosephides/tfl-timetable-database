@@ -1,8 +1,8 @@
+require 'sqlite3'
+require 'sequel'
+
 class Database
   attr_accessor :db
-
-  require 'sqlite3'
-  require 'sequel'
 
   def initialize(path)
 

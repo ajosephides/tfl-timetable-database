@@ -1,8 +1,9 @@
-class Station
-  attr_accessor :id, :name, :lines, :lat, :long
+require 'sqlite3'
+require 'sequel'
 
-  require 'sqlite3'
-  require 'sequel'
+class Station
+
+  attr_accessor :id, :name, :lines, :lat, :long
 
   def initialize(id, name, lines, lat, long)
     @id = String(id)
