@@ -1,16 +1,16 @@
-class Line
-  attr_accessor :id, :name
-
   require 'sqlite3'
   require 'sequel'
 
+  class Line
+  attr_accessor :id, :name
+
   def initialize(id, name)
-    @id = id
-    @name = name
+    @id = String(id)
+    @name = String(name)
   end
 
   def store(db)
-    db.db[:lines].insert_conflict.insert(id:@id.to_s, name:@name.to_s)
+    db.db[:lines].insert_conflict.insert(id:@id, name:@name)
   end
 
 end

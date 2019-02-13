@@ -5,19 +5,24 @@ class Station
   require 'sequel'
 
   def initialize(id, name, lines, lat, long)
-    @id = id
-    @name = name
+    @id = String(id)
+    @name = String(name)
     @lines = [lines]
-    @lat = lat
-    @long = long
+    @lat = Float(lat)
+    @long = Float(long)
   end
 
-  def store(db)
-    db.db[:stations].insert_conflict.insert(id:@id.to_s, name:@name.to_s, lat:@lat.to_f, long:@long.to_f)
+def store(db)
+  store_station(db)
+  store_lines(db)
+end
+
+  def store_station(db)
+    db.db[:stations].insert_conflict.insert(id:@id, name:@name, lat:@lat, long:@long)
   end
 
   def store_lines(db)
-    lines.each{|i| i.each{|j| db.db[:station_lines].insert_conflict.insert(station_id:@id.to_s, line_id:j.to_s)}}
+    lines.each{|i| i.each{|j| db.db[:station_lines].insert_conflict.insert(station_id:@id, line_id:j.to_s)}}
   end
 
 end

@@ -29,6 +29,7 @@ class Database
     end
 
     @db = Sequel.connect(adapter:'sqlite', database: path)
+   # @sequel_tube
   end
 
 end
