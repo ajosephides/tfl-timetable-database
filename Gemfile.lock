@@ -2,12 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     sequel (5.17.0)
+    sqlite3 (1.4.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   sequel
+  sqlite3
 
 BUNDLED WITH
    2.0.1
