@@ -1,7 +1,9 @@
-  require 'sqlite3'
-  require 'sequel'
+# frozen_string_literal: true
 
-  class Line
+require 'sqlite3'
+require 'sequel'
+
+class Line
   attr_accessor :id, :name
 
   def initialize(id, name)
@@ -10,7 +12,6 @@
   end
 
   def store(db)
-    db.db[:lines].insert_conflict.insert(id:@id, name:@name)
+    db.db[:lines].insert_conflict.insert(id: @id, name: @name)
   end
-
 end

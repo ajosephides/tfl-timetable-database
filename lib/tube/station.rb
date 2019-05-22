@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'sqlite3'
 require 'sequel'
 
 class Station
-
   attr_accessor :id, :name, :lines, :lat, :long
 
   def initialize(id, name, lines, lat, long)
@@ -13,17 +14,16 @@ class Station
     @long = Float(long)
   end
 
-def store(db)
-  store_station(db)
-  store_lines(db)
-end
+  def store(db)
+    store_station(db)
+    store_lines(db)
+  end
 
   def store_station(db)
-    db.db[:stations].insert_conflict.insert(id:@id, name:@name, lat:@lat, long:@long)
+    db.db[:stations].insert_conflict.insert(id: @id, name: @name, lat: @lat, long: @long)
   end
 
   def store_lines(db)
-    lines.each{|i| db.db[:station_lines].insert_conflict.insert(station_id:@id, line_id:String(i))}
+    lines.each { |i| db.db[:station_lines].insert_conflict.insert(station_id: @id, line_id: String(i)) }
   end
-
 end
