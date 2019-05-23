@@ -1,11 +1,10 @@
 # frozen_string_literal: true
+require 'net/http'
+require 'json'
+require 'api/secrets'
+include Secrets
 
 class TflApi
-  require 'net/http'
-  require 'json'
-  require 'api/secrets'
-
-  include Secrets
 
   def initialize
     super
