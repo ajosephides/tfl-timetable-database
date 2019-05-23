@@ -5,6 +5,7 @@ require 'tflParse'
 require 'api/tfl_api'
 
 tubeDb = Database.new('./lib/database/london_tube.db')
+tubeDb.createLinesTable
 
 tubeLineApi = TflApi.new
 tubeLineParse = TflJsonParse.new
