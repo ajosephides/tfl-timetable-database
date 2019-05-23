@@ -6,10 +6,6 @@ require 'tube/station'
 require 'tube/lines'
 
 class TflJsonParse
-  #def createTubeLine(jsonResponse)
-    #tubeLineArray = jsonResponse.map { |i| Line.new(i['id'], i['name']) }
-    #tubeLineArray
-  #end
 
   def createTubeStop(jsonResponse)
     tubeStopArray = jsonResponse.map do |i|
