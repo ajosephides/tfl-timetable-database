@@ -10,7 +10,6 @@ class Lines
   end
 
   def store(db)
-    puts @all_lines.inspect
     self.all_lines.each { |line| line.store(db) }
   end
 
