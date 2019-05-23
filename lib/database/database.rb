@@ -2,6 +2,9 @@
 
 require 'sqlite3'
 require 'sequel'
+require 'tube/line'
+require 'tube/station'
+require 'tube/lines'
 
 class Database
   attr_accessor :db
@@ -25,9 +28,15 @@ class Database
     end
 
     @db = Sequel.connect(adapter: 'sqlite', database: path)
-    # @sequel_tube
   end
 
+  def createLines
+    createLinesTable
+    lines = Lines.new
+    lines.populate
+    lines.store(self)
+  end
+  
   def createLinesTable
     @db.create_table :lines do
       primary_key String :id
@@ -35,4 +44,5 @@ class Database
       unique %i[id name]
     end
   end
+
 end
