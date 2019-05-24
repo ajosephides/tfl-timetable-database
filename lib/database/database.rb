@@ -63,4 +63,8 @@ class Database
     line_ids = @db[:lines].map([:id, :name])
   end
 
+  def getStationIdAndLines
+    stationLines = @db[:station_lines].map([:station_id, :line_id])
+  end
+
 end
