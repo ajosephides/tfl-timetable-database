@@ -17,9 +17,13 @@ class Lines
     self.all_lines << line
   end
 
-  def populate
+  def populateJson
     rawJson = TflApi.new.tubeLines
-    TflJsonParse.new.tubeLines(rawJson, self)  
+    rawJson.select { |line| self.addLine( Line.new(line['id'], line['name']))} 
+  end
+
+  def populateDb(lines)
+    lines.select { |line| self.addLine( Line.new(line[0], line[1]))} 
   end
 
 end

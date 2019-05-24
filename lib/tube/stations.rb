@@ -17,4 +17,17 @@ class Stations
     self.all_stations << station
   end
   
+  def populateJson(lines)
+    lines.all_lines.each { |line| TflApi.new.tubeStops(line).each{
+      |station| self.addStation(Station.new(
+        station['id'],
+        station['commonName'],
+        station['lineModeGroups'].select { |j| j['modeName'] == 'tube' }[0]['lineIdentifier'],
+        station['lat'],
+        station['lon']
+      )
+    )
+    } 
+  }
+  end
 end

@@ -5,6 +5,8 @@ require 'sequel'
 require 'tube/line'
 require 'tube/station'
 require 'tube/lines'
+require 'tube/stations'
+
 
 class Database
   attr_accessor :db
@@ -17,8 +19,18 @@ class Database
   def createLines
     createLinesTable
     lines = Lines.new
-    lines.populate
+    lines.populateJson
     lines.store(self)
+  end
+
+  def createStations
+    createStationTable
+    createStationLineTable
+    lines = Lines.new
+    lines.populateDb(self.getAllLines)
+    stations = Stations.new
+    stations.populateJson(lines)
+    stations.store(self)
   end
   
   def createLinesTable
@@ -45,6 +57,10 @@ class Database
       String :line_id
       unique %i[station_id line_id]
     end
+  end
+
+  def getAllLines
+    line_ids = @db[:lines].map([:id, :name])
   end
 
 end

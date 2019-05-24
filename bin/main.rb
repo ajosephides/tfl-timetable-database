@@ -6,6 +6,8 @@ require 'api/tfl_api'
 
 tubeDb = Database.new('./lib/database/london_tube.db')
 tubeDb.createLines
+stations = Stations.new
+tubeDb.createStations
 
 #tubeLineApi = TflApi.new
 #tubeLineParse = TflJsonParse.new
