@@ -64,7 +64,9 @@ class Database
   end
 
   def getStationIdAndLines
-    stationLines = @db[:station_lines].all
+    #stationLines = @db[:station_lines].all
+    #for testing use below to give a small subset
+    stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
   end
 
 end
