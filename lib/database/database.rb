@@ -64,7 +64,7 @@ class Database
   end
 
   def getStationIdAndLines
-    stationLines = @db[:station_lines].map([:station_id, :line_id])
+    stationLines = @db[:station_lines].all
   end
 
 end

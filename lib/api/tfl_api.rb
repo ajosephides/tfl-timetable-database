@@ -27,4 +27,14 @@ class TflApi
     response = Net::HTTP.get(uri)
     JSON.parse(response)
   end
+
+  def timetable(stationLines)
+    appId = @APP_ID
+    apiKey = @API_KEY
+    url = "https://api.tfl.gov.uk/Line/#{stationLines.line_id}circle/Timetable/#{stationLines.station_id}?direction=outbound&app_id=#{appId}&app_key=#{apiKey}"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    JSON.parse(response)  
+  end
+
 end
