@@ -6,6 +6,8 @@ require 'tube/line'
 require 'tube/station'
 require 'tube/lines'
 require 'tube/stations'
+require 'tube/timetable'
+require 'tube/timetables'
 
 
 class Database
@@ -67,6 +69,8 @@ class Database
     #stationLines = @db[:station_lines].all
     #for testing use below to give a small subset
     stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
+    timetable = Timetables.new
+    timetable.populateJson(stationLines)
   end
 
 end
