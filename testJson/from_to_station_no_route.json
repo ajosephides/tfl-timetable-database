@@ -1,0 +1,9 @@
+{
+  "$type": "Tfl.Api.Presentation.Entities.ApiError, Tfl.Api.Presentation.Entities",
+  "timestampUtc": "2019-05-24T13:46:45.7433216Z",
+  "exceptionType": "ApiException",
+  "httpStatusCode": 500,
+  "httpStatus": "InternalServerError",
+  "relativeUri": "/Line/bakerloo/Timetable/940GZZLURGP/to/940GZZLUHPK",
+  "message": "No valid route found for 940GZZLURGP to 940GZZLUHPK on line: bakerloo"
+}
