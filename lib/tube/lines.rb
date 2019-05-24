@@ -1,6 +1,8 @@
 require 'tube/line'
 require 'tube/station'
 require 'tube/lines'
+require 'api/tfl_api'
+
 
 class Lines
   attr_accessor :all_lines
