@@ -11,13 +11,29 @@ class Timetables
     @all_timetables = []
   end
 
-  def addLine(timetable)
+  def addTimetable(timetable)
     self.all_timetables << timetable
   end
 
-  def populateJson(stationLines)
+  def collectJson(stationLines)
+    rawJson = []
     stationLines.each { |stationLine| 
-    puts TflApi.new.timetable(stationLine)
+      rawJson << TflApi.new.timetable(stationLine)
+    }
+    return rawJson
+  end
+
+  def populateJson(rawJson)
+    rawJson.each { |station| station["timetable"]["routes"][0]["stationIntervals"][0]["intervals"].
+      each{ |timetable| self.addTimetable(Timetable.new(
+        station["timetable"]["departureStopId"],
+        timetable["stopId"],
+        station["lineId"],
+        station["direction"],
+        timetable["timeToArrival"]
+        )
+      )
+    }
   }
   end
 

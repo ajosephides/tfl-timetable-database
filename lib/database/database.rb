@@ -69,8 +69,9 @@ class Database
     #stationLines = @db[:station_lines].all
     #for testing use below to give a small subset
     stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
-    timetable = Timetables.new
-    timetable.populateJson(stationLines)
+    timetables = Timetables.new
+    timetables.populateJson(timetables.collectJson(stationLines))
+    puts timetables.all_timetables.inspect
   end
 
 end
