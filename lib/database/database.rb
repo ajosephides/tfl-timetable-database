@@ -68,10 +68,21 @@ class Database
   def getStationIdAndLines
     #stationLines = @db[:station_lines].all
     #for testing use below to give a small subset
+    createTimetableTable
     stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
     timetables = Timetables.new
     timetables.populateJson(timetables.collectJson(stationLines))
-    puts timetables.all_timetables.inspect
+    #puts timetables.all_timetables.inspect
   end
 
+  def createTimetableTable
+    @db.create_table :timetables do
+      String :from_station
+      String :to_station
+      String :line_id
+      String :direction
+      Float :interval_mins
+      unique %i[from_station to_station line_id direction interval_mins]
+    end
+  end
 end
