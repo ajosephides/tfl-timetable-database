@@ -24,12 +24,13 @@ class Timetables
     stationLines.each { |stationLine| 
       rawJson << TflApi.new.timetable(stationLine)
     }
+    #jsonLog(rawJson)
     return rawJson
   end
 
   def populateJson(rawJson)
-    rawJson.each { |station| station["timetable"]["routes"][0]["stationIntervals"][0]["intervals"].
-      each{ |timetable| self.addTimetable(Timetable.new(
+    rawJson.each { |station| if station['stops'].size > 0 && station.key?('httpStatusCode') == false && station.key?('statusErrorMessage') == false
+      station["timetable"]["routes"][0]["stationIntervals"][0]["intervals"].each{ |timetable| self.addTimetable(Timetable.new(
         station["timetable"]["departureStopId"],
         timetable["stopId"],
         station["lineId"],
@@ -38,7 +39,16 @@ class Timetables
         )
       )
     }
+  end
   }
+  end
+
+  def jsonLog(rawJson)
+    file = File.open("./logs/rawJson.log", "w")
+    rawJson.each do |station|
+      file.puts station.inspect
+    end
+    file.close
   end
 
 end

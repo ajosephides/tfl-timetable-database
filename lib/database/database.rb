@@ -65,11 +65,11 @@ class Database
     line_ids = @db[:lines].map([:id, :name])
   end
 
-  def getStationIdAndLines
-    #stationLines = @db[:station_lines].all
-    #for testing use below to give a small subset
+  def createTimetables
+    stationLines = @db[:station_lines].all
     createTimetableTable
-    stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
+    #for testing use below to give a small subset
+    #stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
     timetables = Timetables.new
     timetables.populateJson(timetables.collectJson(stationLines))
     timetables.store(self)

@@ -7,3 +7,4 @@ secrets.rb
 london_tube.db
 /.vscode/*
 irb_testing.rb
+/logs/*
