@@ -15,6 +15,10 @@ class Timetables
     self.all_timetables << timetable
   end
 
+  def store(db)
+    self.all_timetables.each { |timetable| timetable.store(db) }
+  end
+
   def collectJson(stationLines)
     rawJson = []
     stationLines.each { |stationLine| 

@@ -72,7 +72,7 @@ class Database
     stationLines = @db[:station_lines].where(station_id:'940GZZLUGHK').all
     timetables = Timetables.new
     timetables.populateJson(timetables.collectJson(stationLines))
-    #puts timetables.all_timetables.inspect
+    timetables.store(self)
   end
 
   def createTimetableTable
