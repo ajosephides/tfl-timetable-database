@@ -9,7 +9,7 @@ class Timetable
     @toStationId = String(toStationId)
     @lineId = String(lineId)
     @direction = String(direction)
-    @interval = String(interval)
+    @interval = Float(interval)
   end
 
 end
